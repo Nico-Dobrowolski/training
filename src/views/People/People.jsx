@@ -2,19 +2,21 @@ import { useEffect, useState } from "react"
 import PeopleFilter from "../../composents/PeopleFilter/PeopleFilter"
 import PeopleTable from "../../composents/PeopleTable/PeopleTable"
 
-
 const People = () => {
 
-    const [sw,setSw] = useState({})
+
+    const [data,setData] = useState({})
     const [filter,setFilter] = useState('')
     const [loading,setLoading] = useState(true)
 
     //Bloqué par la création de hooks costum 'useFetch()'
     useEffect(() => {
-        fetch(`https://swapi.dev/api/people?search=${filter}`)
+        setLoading(true)
+        fetch(`https://swapi.dev/api/people/?search=${filter}`)
         .then(res => res.json())
         .then((result) => {
-            setSw(result.results)
+            //Init variables to table
+            setData(result)
             setLoading(false)
         },
         (error) => {
@@ -25,7 +27,7 @@ const People = () => {
     }, [filter])
 
     //Callback
-    const onFilter = (filter) => {
+    const onChangeFilter = (filter) => {
         setFilter(filter);
     }
 
@@ -38,8 +40,8 @@ const People = () => {
 
     return (
       <>
-        <PeopleFilter onFilter={onFilter} filter={filter}/>
-        <PeopleTable sw={sw}/>
+        <PeopleFilter onChangeFilter={onChangeFilter} filter={filter} />
+        <PeopleTable data={data}  />
       </>
 
     )

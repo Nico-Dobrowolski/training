@@ -1,6 +1,7 @@
 import PeopleItem from "../PeopleItem/PeopleItem"
 
-const PeopleTable = ({sw}) => {
+const PeopleTable = ({data}) => {
+
     return (
       <>
         <table className="table is-fullwidth">
@@ -12,8 +13,8 @@ const PeopleTable = ({sw}) => {
                 </tr>
             </thead>
             <tbody>
-              {Array.isArray(sw) ? 
-                sw.map(({name, gender, birth_year}, index) => {
+              {Array.isArray(data.results) ? 
+                data.results.map(({name, gender, birth_year}, index) => {
                   return (              
                     <PeopleItem key={index} name={name} gender={gender} birth_year={birth_year} />
                   )             

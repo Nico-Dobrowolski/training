@@ -6,9 +6,6 @@ import {
 import People from './views/People/People';
 
 function App() {
-
-  
-
   return (
     <Routes>
       <Route path="/" element={<People />} />
